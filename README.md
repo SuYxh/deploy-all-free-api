@@ -32,3 +32,8 @@ containers=("kimi-free-api" "glm-free-api" "qwen-free-api" "step-free-api" "meta
 ports=(8000 8001 8002 8003 8004 8005 8006)
 ```
 
+
+
+### 参数
+
+`-del` : 只停止、删除容器和镜像，不再重新拉去和运行，使用示例: `./deploy -del`

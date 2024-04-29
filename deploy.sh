@@ -5,12 +5,6 @@ containers=("kimi-free-api" "glm-free-api" "qwen-free-api" "step-free-api" "meta
 # 在这里修改端口
 ports=(8000 8001 8002 8003 8004 8005 8006)
 
-# 网络诊断
-echo "Checking network connection to Docker Hub..."
-if ! curl -s https://registry-1.docker.io/v2/ > /dev/null; then
-    echo "Cannot connect to Docker Hub. Please check your network connection."
-    exit 1
-fi
 
 # 停止并删除容器
 for i in "${!containers[@]}"; do
@@ -34,6 +28,19 @@ for i in "${!containers[@]}"; do
         echo "Image $image does not exist, skipping remove."
     fi
 done
+
+# 如果指定了 -del 参数，那么脚本到此结束
+if [ "$1" == "-del" ]; then
+    echo "Deleted successfully"
+    exit 0
+fi
+
+# 网络诊断
+echo "Checking network connection to Docker Hub..."
+if ! curl -s https://registry-1.docker.io/v2/ > /dev/null; then
+    echo "Cannot connect to Docker Hub. Please check your network connection."
+    exit 1
+fi
 
 # 拉取最新的镜像，并确保每个操作之间的顺序
 for container in "${containers[@]}"; do

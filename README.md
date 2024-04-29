@@ -2,6 +2,8 @@
 
 一键部署所有的 Free API 项目: [LLM Red Team](https://github.com/LLM-Red-Team)
 
+每次部署之前会停止并删除容器和镜像，然后重新拉取、运行。
+
 
 
 ### 部署
